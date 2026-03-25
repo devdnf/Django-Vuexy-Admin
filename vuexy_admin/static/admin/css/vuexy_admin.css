@@ -251,14 +251,24 @@ fieldset.vuexy-fieldset {
 .vuexy-form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23a5a3ae' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.875rem center; background-size: 14px 10px; padding-right: 2.25rem; }
 [dir="rtl"] .vuexy-form-field select { background-position: left 0.875rem center; padding-right: 0.875rem; padding-left: 2.25rem; }
 
-/* Checkboxes */
-.vuexy-checkbox-field .form-check-input {
-  width: 2.5rem;
-  height: 1.25rem;
-  margin-top: 0;
+/* Checkboxes — target both Bootstrap-classed and Django's bare checkbox widget */
+.vuexy-checkbox-field .form-check-input,
+.vuexy-checkbox-field .form-check input[type="checkbox"] {
+  float: left;
+  margin-left: -1.8em;
+  width: 1em;
+  height: 1em;
+  margin-top: 0.2em;
   accent-color: var(--bs-primary);
   cursor: pointer;
 }
+
+[dir="rtl"] .vuexy-checkbox-field .form-check input[type="checkbox"] {
+  float: right;
+  margin-right: -1.8em;
+  margin-left: 0;
+}
+
 .vuexy-checkbox-field .form-check-label { font-size: 0.875rem; color: var(--bs-body-color); margin-left: 0.5rem; cursor: pointer; }
 
 /* Readonly fields */
@@ -409,7 +419,7 @@ p.errornote::before { content: "⚠"; position: absolute; left: 0.875rem; }
 .related-widget-wrapper { display: inline-flex; align-items: center; gap: 0.5rem; width: 100%; }
 .related-widget-wrapper > input,
 .related-widget-wrapper > select { flex: 1; }
-.related-widget-wrapper a { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: var(--bs-border-radius); text-decoration: none; transition: background .15s; flex-shrink: 0; }
+.related-widget-wrapper a { display: inline-flex; align-items: center; justify-content: center; width: fit-content; height: 2rem; border-radius: var(--bs-border-radius); text-decoration: none; transition: background .15s; flex-shrink: 0; }
 .related-widget-wrapper a img { display: none; }
 .related-widget-wrapper a.related-lookup { background: rgba(var(--bs-primary-rgb), .1); color: var(--bs-primary); }
 .related-widget-wrapper a.add-related { background: rgba(var(--bs-success-rgb), .1); color: var(--bs-success); }
