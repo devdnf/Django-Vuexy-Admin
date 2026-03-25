@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-vuexy-admin"
+version = "0.1.0"
+description = "Vuexy-themed Django admin dashboard with RTL support, sidebar config, dark mode, and pluggable KPI stats"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["django", "admin", "vuexy", "dashboard", "rtl"]
+classifiers = [
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Framework :: Django :: 5.1",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "django>=4.2",
+]
+
+[project.optional-dependencies]
+dev = ["build", "twine"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["vuexy_admin*"]
+
+[tool.setuptools.package-data]
+vuexy_admin = [
+    "templates/**/*",
+    "static/**/*",
+    "locale/**/*",
+]
