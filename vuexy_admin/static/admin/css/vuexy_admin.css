@@ -409,6 +409,7 @@ p.errornote::before { content: "⚠"; position: absolute; left: 0.875rem; }
 .calendar td a:hover { background: rgba(var(--bs-primary-rgb), .15) !important; border-radius: 3px; }
 .calendar td.selected a { background: var(--bs-primary) !important; color: #fff !important; border-radius: 3px; }
 .calendar td.today a { font-weight: 700; color: var(--bs-primary) !important; }
+.calendar td.today.selected a { background: var(--bs-primary) !important; color: #fff !important; border-radius: 3px; }
 .clockbox h2 { background: var(--bs-primary) !important; color: #fff !important; }
 .calendar-shortcuts, .timelist { font-size: 0.75rem; }
 
