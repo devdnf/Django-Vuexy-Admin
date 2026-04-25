@@ -338,19 +338,84 @@ p.errornote::before { content: "⚠"; position: absolute; left: 0.875rem; }
 .add-row a::before { content: "+"; font-size: 1.1rem; line-height: 1; }
 .add-row a:hover { text-decoration: underline; }
 
-/* Tabular inline table */
-.tabular .table { font-size: 0.875rem; }
-.tabular .table thead th {
+/* ══════════════════════════════════════════════════════════════════════════
+   Tabular inline table — UNIVERSAL transparent background fix
+
+   Bootstrap's core CSS applies:
+     .table > :not(caption) > * > * { background-color: var(--bs-table-bg); }
+   which sets white backgrounds on all table cells.
+
+   In dark mode this makes inline tables appear as white blocks inside dark
+   cards. We force transparent on ALL tables inside any inline wrapper:
+     - .inline-group (Django's inline wrapper)
+     - .card-datatable (Vuexy's card-datatable wrapper)
+     - .djn-fieldset (nested_admin's fieldset)
+     - .table.tabular (compound class on vuexy tabular.html tables)
+     - .djn-table (nested_admin tables)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* 1. Force the CSS variable to transparent on all inline tables */
+.inline-group table,
+.card-datatable table,
+.table.tabular,
+table.tabular,
+.djn-table,
+.djn-fieldset table {
+  font-size: 0.875rem;
+  background: transparent !important;
+  background-color: transparent !important;
+  --bs-table-bg: transparent !important;
+  --bs-table-striped-bg: transparent !important;
+  --bs-table-accent-bg: transparent !important;
+}
+
+/* 2. Override Bootstrap's exact cell-level background selector */
+.inline-group table > :not(caption) > * > *,
+.card-datatable table > :not(caption) > * > *,
+.table.tabular > :not(caption) > * > *,
+.djn-table > :not(caption) > * > *,
+.djn-fieldset table > :not(caption) > * > * {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 3. Explicit thead / th */
+.inline-group table thead,
+.inline-group table thead th,
+.table.tabular > thead,
+.table.tabular > thead > tr > th {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .04em;
   color: var(--bs-heading-color);
   padding: 0.65rem 0.875rem;
-  background: transparent;
+  background: transparent !important;
+  background-color: transparent !important;
 }
-.tabular .table tbody td { padding: 0.6rem 0.875rem; vertical-align: middle; }
-.tabular .table tbody tr:hover td { background: rgba(var(--bs-primary-rgb), .04); }
+
+/* 4. Explicit tbody / tr / td */
+.inline-group table tbody,
+.inline-group table tbody tr,
+.table.tabular > tbody,
+.table.tabular > tbody > tr {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+.inline-group table tbody td,
+.table.tabular > tbody > tr > td {
+  padding: 0.6rem 0.875rem;
+  vertical-align: middle;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* 5. Hover state */
+.inline-group table tbody tr:hover td,
+.table.tabular > tbody > tr:hover > td {
+  background: rgba(var(--bs-primary-rgb), .04) !important;
+}
 
 /* Stacked inline rows */
 .inline-related.border-dashed { border-style: dashed !important; }
@@ -542,3 +607,745 @@ a[role="button"]:not(.btn):not(.dropdown-item):not([class*="page-link"]):hover {
 /* ── Clearfix ────────────────────────────────────────────────────────────── */
 .djn-clear::after,
 .module::after { content: ""; display: table; clear: both; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   DateRangeFilter (rangefilter package) — Vuexy integration
+   The rangefilter package renders each date-range widget as:
+     <li class="rangefilter-filter">
+       <h3>By …</h3>
+       <input type="text" …> From date
+       <input type="text" …> To date
+       <a class="…" href="…">Search</a>
+       <a class="…" href="…">Reset</a>
+     </li>
+   We map them to look like the other filter-select groups.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Wrap each date range group the same way as .filter-select-group */
+li.rangefilter-filter,
+.rangefilter-filter {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 180px;
+  max-width: 260px;
+}
+
+/* Section heading */
+li.rangefilter-filter h3,
+.rangefilter-filter h3 {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--bs-secondary-color);
+  margin: 0 0 0.375rem 0;
+  padding: 0;
+}
+
+/* Date inputs */
+li.rangefilter-filter input[type="text"],
+.rangefilter-filter input[type="text"] {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  margin-bottom: 0.375rem;
+}
+li.rangefilter-filter input[type="text"]:focus,
+.rangefilter-filter input[type="text"]:focus {
+  border-color: var(--bs-primary);
+  outline: 0;
+  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), .2);
+}
+
+/* Placeholder text */
+li.rangefilter-filter input[type="text"]::placeholder,
+.rangefilter-filter input[type="text"]::placeholder {
+  color: var(--bs-secondary-color);
+  opacity: 1;
+}
+
+/* Search / Reset links → small Vuexy buttons */
+li.rangefilter-filter a,
+.rangefilter-filter a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: var(--bs-border-radius);
+  text-decoration: none;
+  transition: background-color .15s, border-color .15s, color .15s;
+  border: 1px solid transparent;
+  margin-top: 0.25rem;
+  margin-right: 0.375rem;
+}
+
+/* "Search" button style */
+li.rangefilter-filter a:first-of-type,
+.rangefilter-filter a:first-of-type {
+  background-color: var(--bs-primary);
+  color: #fff;
+  border-color: var(--bs-primary);
+}
+li.rangefilter-filter a:first-of-type:hover,
+.rangefilter-filter a:first-of-type:hover {
+  background-color: color-mix(in srgb, var(--bs-primary) 85%, #000 15%);
+  border-color:     color-mix(in srgb, var(--bs-primary) 85%, #000 15%);
+}
+
+/* "Reset" button style */
+li.rangefilter-filter a:last-of-type,
+.rangefilter-filter a:last-of-type {
+  background-color: transparent;
+  color: var(--bs-secondary-color);
+  border-color: var(--bs-border-color);
+}
+li.rangefilter-filter a:last-of-type:hover,
+.rangefilter-filter a:last-of-type:hover {
+  background-color: var(--bs-tertiary-bg);
+  color: var(--bs-body-color);
+}
+
+/* The outer <ul> that wraps all rangefilter widgets — make it flex too */
+#changelist-filter ul.rangefilter-filter-list,
+ul.rangefilter-filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Installment inline — compact datetime widget for tabular inlines
+   Tightens the Django split-datetime widget (two separate inputs stacked)
+   so it doesn't overflow the installment table columns.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Compact date/time in inline rows */
+.tabular .table td .vDateField,
+.tabular .table td .vTimeField {
+  max-width: 120px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
+}
+
+/* Tighten the shortcut links inside inline date cells */
+.tabular .table td .datetimeshortcuts {
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+/* The "Already Paid" badge in installment inline */
+.tabular .table td .badge.bg-label-success {
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Create Company Rental Order — autocomplete select styling
+   The form uses AutocompleteSelect → Select2 widgets inside .vuexy-form-field.
+   The widgets render as .select2-container with width set inline; we override
+   to 100% so they fill their grid column properly.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.vuexy-form-field .select2-container {
+  width: 100% !important;
+}
+
+.vuexy-form-field .select2-container--admin-autocomplete .select2-selection--single,
+.vuexy-form-field .select2-container--default .select2-selection--single {
+  width: 100% !important;
+  border-color: var(--bs-border-color) !important;
+  background-color: var(--bs-body-bg) !important;
+  border-radius: var(--bs-border-radius) !important;
+  height: calc(1.53em + 0.875rem + 2px) !important;
+}
+
+/* Focus state for the autocomplete selects inside vuexy-form-field */
+.vuexy-form-field .select2-container--admin-autocomplete.select2-container--focus .select2-selection--single,
+.vuexy-form-field .select2-container--default.select2-container--focus .select2-selection--single {
+  border-color: var(--bs-primary) !important;
+  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), .2) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   JSON pretty-print block (JSONPreviewMixin)
+   Moved here from inline <style> tags injected via format_html().
+   The Python code can drop the inline CSS injection and rely on this file.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.json-pretty-preview pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 6px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  background-color: rgba(0,0,0,.03);
+  color: inherit;
+}
+
+.dark-style .json-pretty-preview pre {
+  background-color: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.1);
+  color: #dcdfe6;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Tabular inline — field cell wrapper
+   The .field-cell-inner div (added in tabular.html) gives us a scoping
+   container to control the layout of any widget type inside a <td>.
+
+   NOTE: django-nested-admin uses its OWN tabular template with different
+   classes: .djn-table, .djn-td, .djn-tr — and NO .field-cell-inner wrapper.
+   All rules below are duplicated for BOTH template structures.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* All cells top-aligned */
+.tabular .table tbody td,
+.djn-table tbody td { vertical-align: top; }
+
+/* The wrapper div inside every inline <td> (vuexy tabular.html only) */
+.tabular .table td .field-cell-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+/* ── Split datetime widget inside tabular inlines ───────────────────────── */
+/*
+ * Django's AdminSplitDateTime renders:
+ *   <p class="datetime">
+ *     <label>Date:</label> <input class="vDateField" size="10">
+ *     <br>
+ *     <label>Time:</label> <input class="vTimeField" size="8">
+ *   </p>
+ * Then DateTimeShortcuts.js injects <span class="datetimeshortcuts">
+ * with "Today"/"Now" links and calendar/clock icons.
+ *
+ * We hide the labels, <br>, and shortcuts to make a compact cell.
+ * Rules target BOTH vuexy tabular (.field-cell-inner) and
+ * nested_admin tabular (.djn-td).
+ */
+
+/* The <p class="datetime"> wrapper — compact flex row */
+.tabular .table td .field-cell-inner p.datetime,
+.djn-table td.djn-td p.datetime {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Hide "Date:" / "Time:" labels */
+.tabular .table td .field-cell-inner p.datetime > label,
+.djn-table td.djn-td p.datetime > label {
+  display: none;
+}
+
+/* Hide <br> between date and time inputs */
+.tabular .table td .field-cell-inner p.datetime > br,
+.djn-table td.djn-td p.datetime > br {
+  display: none;
+}
+
+/* Hide ALL datetimeshortcuts (Today/Now links + icons) in inline rows */
+.tabular .table td .field-cell-inner .datetimeshortcuts,
+.djn-table td.djn-td .datetimeshortcuts {
+  display: none !important;
+}
+
+/* Constrain date and time inputs — compact for table cells */
+.tabular .table td .field-cell-inner .vDateField,
+.tabular .table td .field-cell-inner .vTimeField,
+.djn-table td.djn-td .vDateField,
+.djn-table td.djn-td .vTimeField {
+  width: 100px !important;
+  max-width: 100px;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.8125rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+.tabular .table td .field-cell-inner .vDateField:focus,
+.tabular .table td .field-cell-inner .vTimeField:focus,
+.djn-table td.djn-td .vDateField:focus,
+.djn-table td.djn-td .vTimeField:focus {
+  border-color: var(--bs-primary);
+  outline: 0;
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2);
+}
+
+
+/* Make tabular inline table scroll horizontally when content is wide */
+.tabular .card-datatable,
+.djn-table { overflow-x: auto; }
+
+/* ── Regular inputs inside inline <td> ───────────────────────────────────── */
+/* Text / number / email / url inputs */
+.tabular .table td .field-cell-inner input:not([type="checkbox"]):not([type="radio"]):not(.vDateField):not(.vTimeField),
+.tabular .table td .field-cell-inner select,
+.tabular .table td .field-cell-inner textarea,
+.djn-table td.djn-td input:not([type="checkbox"]):not([type="radio"]):not(.vDateField):not(.vTimeField),
+.djn-table td.djn-td select,
+.djn-table td.djn-td textarea {
+  display: block;
+  width: 100%;
+  min-width: 80px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  transition: border-color .15s;
+}
+.tabular .table td .field-cell-inner input:not([type="checkbox"]):not([type="radio"]):not(.vDateField):not(.vTimeField):focus,
+.tabular .table td .field-cell-inner select:focus,
+.tabular .table td .field-cell-inner textarea:focus,
+.djn-table td.djn-td input:not([type="checkbox"]):not([type="radio"]):not(.vDateField):not(.vTimeField):focus,
+.djn-table td.djn-td select:focus,
+.djn-table td.djn-td textarea:focus {
+  border-color: var(--bs-primary);
+  outline: 0;
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2);
+}
+
+/* Select2 widgets inside inline tds */
+.tabular .table td .field-cell-inner .select2-container,
+.djn-table td.djn-td .select2-container { width: 100% !important; min-width: 120px; }
+.tabular .table td .field-cell-inner .select2-container .select2-selection--single,
+.djn-table td.djn-td .select2-container .select2-selection--single {
+  width: 100% !important;
+  height: calc(1.4em + 0.5rem + 2px) !important;
+  border-color: var(--bs-border-color) !important;
+  background: var(--bs-body-bg) !important;
+  border-radius: var(--bs-border-radius) !important;
+}
+.tabular .table td .field-cell-inner .select2-container .select2-selection--single .select2-selection__rendered,
+.djn-table td.djn-td .select2-container .select2-selection--single .select2-selection__rendered {
+  line-height: calc(1.4em + 0.5rem) !important;
+  padding-left: 0.5rem !important;
+  color: var(--bs-body-color) !important;
+  font-size: 0.875rem !important;
+}
+.tabular .table td .field-cell-inner .select2-container--focus .select2-selection--single,
+.djn-table td.djn-td .select2-container--focus .select2-selection--single {
+  border-color: var(--bs-primary) !important;
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2) !important;
+}
+
+/* Error list inside inline <td> */
+.tabular .table td .field-cell-inner ul.errorlist,
+.djn-table td.djn-td ul.errorlist {
+  list-style: none;
+  padding: 0;
+  margin: 0.15rem 0 0;
+  font-size: 0.75rem;
+  color: var(--bs-danger);
+}
+
+/* ── nested_admin general styling ─────────────────────────────────────────── */
+/* Make nested_admin inline fieldsets look like Vuexy cards */
+.djn-fieldset {
+  border: none !important;
+  background: var(--bs-card-bg, var(--bs-body-bg));
+  border-radius: var(--bs-border-radius-lg);
+  box-shadow: var(--bs-card-box-shadow, 0 2px 6px rgba(0,0,0,.06));
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+.dark-style .djn-fieldset { box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+
+/* nested_admin heading */
+.djn-fieldset h2.inline-heading {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--bs-heading-color);
+  padding: 1rem 1.25rem;
+  margin: 0;
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
+/* nested_admin table header */
+.djn-table .djn-thead th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--bs-heading-color);
+  padding: 0.65rem 0.875rem;
+  background: transparent;
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
+/* nested_admin table cells */
+.djn-table td.djn-td {
+  padding: 0.6rem 0.875rem;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--bs-border-color-translucent);
+}
+.djn-table .djn-tr:hover td { background: rgba(var(--bs-primary-rgb), .04); }
+
+/* nested_admin add-row link */
+.djn-table .add-row td,
+.djn-table .djn-add-item {
+  padding: 0.75rem 1rem;
+}
+.djn-table .add-row a,
+.djn-table .djn-add-handler {
+  color: var(--bs-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.djn-table .add-row a:hover,
+.djn-table .djn-add-handler:hover { text-decoration: underline; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Tabular inline — Select2 inside related-widget-wrapper
+   Django's autocomplete_fields renders:
+     <div class="related-widget-wrapper">
+       <select class="admin-autocomplete"> (hidden by Select2)
+       <span class="select2 select2-container" style="width: auto;">
+       <a class="change-related">…</a>
+     </div>
+   The inline "width: auto" makes it invisible. Fix to 100%.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* related-widget-wrapper inside ANY inline table cell */
+.tabular .table td .related-widget-wrapper,
+.djn-table td.djn-td .related-widget-wrapper,
+.tabular .table td .field-cell-inner .related-widget-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  width: 100%;
+}
+
+/* Force Select2 to fill the wrapper */
+.tabular .table td .related-widget-wrapper .select2-container,
+.djn-table td.djn-td .related-widget-wrapper .select2-container,
+.tabular .table td .field-cell-inner .related-widget-wrapper .select2-container {
+  flex: 1;
+  width: 0 !important;          /* flex: 1 takes over */
+  min-width: 120px;
+}
+
+/* Fix the selection box height, border, and bg for dark mode */
+.tabular .table td .related-widget-wrapper .select2-selection--single,
+.djn-table td.djn-td .related-widget-wrapper .select2-selection--single,
+.tabular .table td .field-cell-inner .related-widget-wrapper .select2-selection--single {
+  height: calc(1.4em + 0.5rem + 2px) !important;
+  border: 1px solid var(--bs-border-color) !important;
+  background: var(--bs-body-bg) !important;
+  border-radius: var(--bs-border-radius) !important;
+}
+.tabular .table td .related-widget-wrapper .select2-selection__rendered,
+.djn-table td.djn-td .related-widget-wrapper .select2-selection__rendered,
+.tabular .table td .field-cell-inner .related-widget-wrapper .select2-selection__rendered {
+  color: var(--bs-body-color) !important;
+  line-height: calc(1.4em + 0.5rem) !important;
+  padding-left: 0.5rem !important;
+  font-size: 0.875rem !important;
+}
+.tabular .table td .related-widget-wrapper .select2-selection__arrow,
+.djn-table td.djn-td .related-widget-wrapper .select2-selection__arrow {
+  height: calc(1.4em + 0.5rem + 2px) !important;
+}
+
+/* Focus ring */
+.tabular .table td .related-widget-wrapper .select2-container--focus .select2-selection--single,
+.djn-table td.djn-td .related-widget-wrapper .select2-container--focus .select2-selection--single {
+  border-color: var(--bs-primary) !important;
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2) !important;
+}
+
+/* Change/Add related icon links — keep small */
+.tabular .table td .related-widget-wrapper a,
+.djn-table td.djn-td .related-widget-wrapper a {
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Tabular inline — File input styling
+   <input type="file"> gets a Vuexy-themed treatment.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.tabular .table td .field-cell-inner input[type="file"],
+.tabular .table td input[type="file"],
+.djn-table td.djn-td input[type="file"] {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  color: var(--bs-body-color);
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  cursor: pointer;
+  transition: border-color .15s;
+}
+.tabular .table td .field-cell-inner input[type="file"]:hover,
+.tabular .table td input[type="file"]:hover,
+.djn-table td.djn-td input[type="file"]:hover {
+  border-color: var(--bs-primary);
+}
+.tabular .table td .field-cell-inner input[type="file"]:focus,
+.tabular .table td input[type="file"]:focus,
+.djn-table td.djn-td input[type="file"]:focus {
+  border-color: var(--bs-primary);
+  outline: 0;
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2);
+}
+
+/* Style the file input button part (WebKit/Blink) */
+.tabular .table td input[type="file"]::file-selector-button,
+.djn-table td.djn-td input[type="file"]::file-selector-button {
+  padding: 0.2rem 0.6rem;
+  margin-right: 0.5rem;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  color: #fff;
+  background: var(--bs-primary);
+  border: none;
+  border-radius: var(--bs-border-radius);
+  cursor: pointer;
+  transition: background .15s;
+}
+.tabular .table td input[type="file"]::file-selector-button:hover,
+.djn-table td.djn-td input[type="file"]::file-selector-button:hover {
+  background: color-mix(in srgb, var(--bs-primary) 85%, #000 15%);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Tabular inline — Readonly field text
+   Readonly fields render as <p class="mb-0">value</p> inside .field-cell-inner.
+   Give them subtle styling so they don't look like floating text.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.tabular .table td .field-cell-inner > p.mb-0,
+.tabular .table td .field-cell-inner > p:only-child,
+.djn-table td.djn-td > p {
+  margin: 0;
+  padding: 0.3rem 0;
+  font-size: 0.875rem;
+  color: var(--bs-body-color);
+  min-height: 1.5em;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   GLOBAL Select2 / Autocomplete Styling
+
+   Select2 renders TWO separate DOM structures:
+   1. The "container" (.select2-container) — sits inside the form field
+   2. The "dropdown" (.select2-dropdown)  — appended to <body>
+
+   All previous CSS only targeted containers inside specific wrappers.
+   This section styles BOTH globally so they work everywhere:
+   change forms, inlines, filters, custom pages.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Global container: every Select2 in the admin ─────────────────────── */
+
+/* All Select2 containers — ensure proper sizing */
+.select2-container--admin-autocomplete,
+.select2-container--default {
+  min-width: 120px;
+}
+
+/* Selection box base styles */
+.select2-container--admin-autocomplete .select2-selection--single,
+.select2-container--default .select2-selection--single {
+  border: 1px solid var(--bs-border-color) !important;
+  background: var(--bs-body-bg) !important;
+  border-radius: var(--bs-border-radius) !important;
+  height: calc(1.53em + 0.875rem + 2px) !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Rendered text inside selection */
+.select2-container--admin-autocomplete .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: var(--bs-body-color) !important;
+  line-height: normal !important;
+  padding-left: 0.75rem !important;
+  padding-right: 1.5rem !important;
+  font-size: 0.9375rem;
+}
+
+/* Placeholder text */
+.select2-container--admin-autocomplete .select2-selection--single .select2-selection__placeholder,
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+  color: var(--bs-secondary-color) !important;
+}
+
+/* Arrow */
+.select2-container--admin-autocomplete .select2-selection--single .select2-selection__arrow,
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 100% !important;
+  right: 0.5rem !important;
+}
+.select2-container--admin-autocomplete .select2-selection__arrow b,
+.select2-container--default .select2-selection__arrow b {
+  border-color: var(--bs-body-color) transparent transparent !important;
+}
+
+/* Focus state */
+.select2-container--admin-autocomplete.select2-container--focus .select2-selection--single,
+.select2-container--admin-autocomplete.select2-container--open .select2-selection--single,
+.select2-container--default.select2-container--focus .select2-selection--single,
+.select2-container--default.select2-container--open .select2-selection--single {
+  border-color: var(--bs-primary) !important;
+  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), .2) !important;
+}
+
+/* ── 2. Global dropdown: the results popup (appended to <body>) ──────────── */
+
+.select2-dropdown {
+  background: var(--bs-body-bg) !important;
+  border: 1px solid var(--bs-border-color) !important;
+  border-radius: var(--bs-border-radius) !important;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, .15) !important;
+  z-index: 9999 !important;
+  min-width: 200px;
+}
+.dark-style .select2-dropdown {
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, .5) !important;
+}
+
+/* Search box inside dropdown */
+.select2-dropdown .select2-search--dropdown {
+  padding: 0.5rem;
+}
+.select2-dropdown .select2-search__field {
+  padding: 0.375rem 0.75rem !important;
+  font-size: 0.875rem !important;
+  border: 1px solid var(--bs-border-color) !important;
+  border-radius: var(--bs-border-radius) !important;
+  background: var(--bs-body-bg) !important;
+  color: var(--bs-body-color) !important;
+  outline: none !important;
+  width: 100%;
+}
+.select2-dropdown .select2-search__field:focus {
+  border-color: var(--bs-primary) !important;
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2) !important;
+}
+
+/* Results list */
+.select2-dropdown .select2-results__options {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Each result option */
+.select2-dropdown .select2-results__option {
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.875rem;
+  color: var(--bs-body-color) !important;
+  transition: background .1s;
+}
+
+/* Hover / keyboard-highlighted option */
+.select2-dropdown .select2-results__option--highlighted,
+.select2-dropdown .select2-results__option--highlighted[aria-selected] {
+  background: rgba(var(--bs-primary-rgb), .12) !important;
+  color: var(--bs-primary) !important;
+}
+
+/* Selected (already chosen) option */
+.select2-dropdown .select2-results__option[aria-selected="true"] {
+  background: rgba(var(--bs-primary-rgb), .08) !important;
+  color: var(--bs-primary) !important;
+  font-weight: 600;
+}
+
+/* "Searching…" / "No results" message */
+.select2-dropdown .select2-results__message {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--bs-secondary-color);
+}
+
+/* ── 3. related-widget-wrapper global fix ─────────────────────────────────── */
+/* Django wraps autocomplete_fields in a .related-widget-wrapper with
+   the Select2 + change/add/delete icon links. Make it a proper flex row. */
+
+.related-widget-wrapper {
+  display: flex !important;
+  align-items: center;
+  gap: 0.375rem;
+}
+/* Select2 inside the wrapper takes available space */
+.related-widget-wrapper > .select2-container {
+  flex: 1;
+  min-width: 0;
+}
+/* Icon links stay small */
+.related-widget-wrapper > a {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ── 4. Global file input styling (not just inlines) ─────────────────────── */
+/* Style all file inputs in the admin to match Vuexy */
+#content input[type="file"] {
+  display: block;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: var(--bs-body-color);
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  cursor: pointer;
+  transition: border-color .15s;
+}
+#content input[type="file"]:hover {
+  border-color: var(--bs-primary);
+}
+#content input[type="file"]:focus {
+  border-color: var(--bs-primary);
+  outline: 0;
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2);
+}
+#content input[type="file"]::file-selector-button {
+  padding: 0.25rem 0.75rem;
+  margin-right: 0.5rem;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  color: #fff;
+  background: var(--bs-primary);
+  border: none;
+  border-radius: var(--bs-border-radius);
+  cursor: pointer;
+  transition: background .15s;
+}
+#content input[type="file"]::file-selector-button:hover {
+  filter: brightness(0.9);
+}
