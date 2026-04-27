@@ -26,7 +26,10 @@
   border: 1px solid var(--bs-border-color);
   border-radius: var(--bs-border-radius) !important;
   text-decoration: none;
-  transition: color .15s, background-color .15s, border-color .15s;
+  transition:
+    color 0.15s,
+    background-color 0.15s,
+    border-color 0.15s;
 }
 /* Other page links */
 .pagination .page-item > a {
@@ -35,7 +38,7 @@
 }
 .pagination .page-item > a:hover {
   color: var(--bs-primary);
-  background-color: rgba(var(--bs-primary-rgb), .08);
+  background-color: rgba(var(--bs-primary-rgb), 0.08);
   border-color: var(--bs-primary);
 }
 /* Active (current) page */
@@ -54,12 +57,22 @@
 }
 
 /* ── Base resets ─────────────────────────────────────────────────────────── */
-body { font-family: "Public Sans", sans-serif !important; }
-a { color: var(--bs-primary); }
-* { box-sizing: border-box; }
+body {
+  font-family: "Public Sans", sans-serif !important;
+}
+a {
+  color: var(--bs-primary);
+}
+* {
+  box-sizing: border-box;
+}
 
 /* ── Django messages → Vuexy alerts ─────────────────────────────────────── */
-ul.messagelist { list-style: none; padding: 0; margin: 0 0 1.25rem 0; }
+ul.messagelist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem 0;
+}
 ul.messagelist li {
   padding: 0.75rem 1rem 0.75rem 2.75rem;
   border-radius: var(--bs-border-radius);
@@ -81,25 +94,37 @@ ul.messagelist li.success {
   color: var(--bs-success-text-emphasis);
   border-color: var(--bs-success-border-subtle);
 }
-ul.messagelist li.success::before { content: "\ec72"; color: var(--bs-success); }
+ul.messagelist li.success::before {
+  content: "\ec72";
+  color: var(--bs-success);
+}
 ul.messagelist li.warning {
   background: var(--bs-warning-bg-subtle);
   color: var(--bs-warning-text-emphasis);
   border-color: var(--bs-warning-border-subtle);
 }
-ul.messagelist li.warning::before { content: "\ea06"; color: var(--bs-warning); }
+ul.messagelist li.warning::before {
+  content: "\ea06";
+  color: var(--bs-warning);
+}
 ul.messagelist li.error {
   background: var(--bs-danger-bg-subtle);
   color: var(--bs-danger-text-emphasis);
   border-color: var(--bs-danger-border-subtle);
 }
-ul.messagelist li.error::before { content: "\ea05"; color: var(--bs-danger); }
+ul.messagelist li.error::before {
+  content: "\ea05";
+  color: var(--bs-danger);
+}
 ul.messagelist li.info {
   background: var(--bs-info-bg-subtle);
   color: var(--bs-info-text-emphasis);
   border-color: var(--bs-info-border-subtle);
 }
-ul.messagelist li.info::before { content: "\ea77"; color: var(--bs-info); }
+ul.messagelist li.info::before {
+  content: "\ea77";
+  color: var(--bs-info);
+}
 
 /* ── Breadcrumbs ─────────────────────────────────────────────────────────── */
 /*
@@ -128,8 +153,12 @@ ol.breadcrumbs a {
   color: var(--bs-primary);
   text-decoration: none;
 }
-ol.breadcrumbs a:hover { text-decoration: underline; }
-ol.breadcrumbs li[aria-current="page"] { color: var(--bs-body-color); }
+ol.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+ol.breadcrumbs li[aria-current="page"] {
+  color: var(--bs-body-color);
+}
 
 /* ── object-tools UL ─────────────────────────────────────────────────────── */
 /*
@@ -139,7 +168,9 @@ ol.breadcrumbs li[aria-current="page"] { color: var(--bs-body-color); }
  * the card — hide that UL to avoid duplication.
  * On other admin pages (change_form, etc.) object-tools is not used.
  */
-body.change-list ul.object-tools { display: none !important; }
+body.change-list ul.object-tools {
+  display: none !important;
+}
 
 /* ── Changelist filter selects ───────────────────────────────────────────── */
 #changelist-filter .filter-select {
@@ -148,7 +179,7 @@ body.change-list ul.object-tools { display: none !important; }
 }
 #changelist-filter .filter-select:focus {
   border-color: var(--bs-primary);
-  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), .2);
+  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), 0.2);
 }
 #changelist-filter .filter-select option[selected] {
   font-weight: 600;
@@ -174,21 +205,28 @@ body.change-list ul.object-tools { display: none !important; }
 }
 
 /* ── Date hierarchy ──────────────────────────────────────────────────────── */
-.date-hierarchy-nav { background: var(--bs-tertiary-bg); }
+.date-hierarchy-nav {
+  background: var(--bs-tertiary-bg);
+}
 .date-hierarchy-nav .btn-outline-secondary:hover,
-.date-hierarchy-nav .btn-outline-secondary.active { color: var(--bs-primary); border-color: var(--bs-primary); }
+.date-hierarchy-nav .btn-outline-secondary.active {
+  color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
 
 /* ── Vuexy fieldset → card appearance ───────────────────────────────────── */
 fieldset.vuexy-fieldset {
   border: none !important;
   background: var(--bs-card-bg, var(--bs-body-bg));
   border-radius: var(--bs-border-radius-lg);
-  box-shadow: var(--bs-card-box-shadow, 0 2px 6px rgba(0,0,0,.06));
+  box-shadow: var(--bs-card-box-shadow, 0 2px 6px rgba(0, 0, 0, 0.06));
   margin-bottom: 1.5rem;
   padding: 0;
   overflow: hidden;
 }
-.dark-style fieldset.vuexy-fieldset { box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+.dark-style fieldset.vuexy-fieldset {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
 
 .vuexy-fieldset-header {
   padding: 1rem 1.25rem;
@@ -204,10 +242,15 @@ fieldset.vuexy-fieldset {
 .vuexy-fieldset-description {
   border-bottom: 1px solid var(--bs-border-color-translucent);
 }
-.vuexy-fieldset-body { padding: 0; }
+.vuexy-fieldset-body {
+  padding: 0;
+}
 
 /* ── Form fields inside fieldset ─────────────────────────────────────────── */
-.vuexy-form-field { display: flex; flex-direction: column; }
+.vuexy-form-field {
+  display: flex;
+  flex-direction: column;
+}
 
 /* Label from Django's label_tag() */
 .vuexy-form-field label,
@@ -219,10 +262,14 @@ fieldset.vuexy-fieldset {
   color: var(--bs-heading-color);
   margin-bottom: 0.375rem;
 }
-.vuexy-form-field label.required::after { content: " *"; color: var(--bs-danger); }
+.vuexy-form-field label.required::after {
+  content: " *";
+  color: var(--bs-danger);
+}
 
 /* Form controls — target all widget types */
-.vuexy-form-field input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+.vuexy-form-field
+  input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
 .vuexy-form-field select,
 .vuexy-form-field textarea {
   display: block;
@@ -235,7 +282,9 @@ fieldset.vuexy-fieldset {
   background-color: var(--bs-body-bg);
   border: 1px solid var(--bs-border-color);
   border-radius: var(--bs-border-radius);
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -245,11 +294,24 @@ fieldset.vuexy-fieldset {
 .vuexy-form-field textarea:focus {
   border-color: var(--bs-primary);
   outline: 0;
-  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), .2);
+  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), 0.2);
 }
-.vuexy-form-field textarea { min-height: 100px; resize: vertical; }
-.vuexy-form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23a5a3ae' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.875rem center; background-size: 14px 10px; padding-right: 2.25rem; }
-[dir="rtl"] .vuexy-form-field select { background-position: left 0.875rem center; padding-right: 0.875rem; padding-left: 2.25rem; }
+.vuexy-form-field textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.vuexy-form-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23a5a3ae' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.875rem center;
+  background-size: 14px 10px;
+  padding-right: 2.25rem;
+}
+[dir="rtl"] .vuexy-form-field select {
+  background-position: left 0.875rem center;
+  padding-right: 0.875rem;
+  padding-left: 2.25rem;
+}
 
 /* Checkboxes — target both Bootstrap-classed and Django's bare checkbox widget */
 .vuexy-checkbox-field .form-check-input,
@@ -269,7 +331,12 @@ fieldset.vuexy-fieldset {
   margin-left: 0;
 }
 
-.vuexy-checkbox-field .form-check-label { font-size: 0.875rem; color: var(--bs-body-color); margin-left: 0.5rem; cursor: pointer; }
+.vuexy-checkbox-field .form-check-label {
+  font-size: 0.875rem;
+  color: var(--bs-body-color);
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
 
 /* Readonly fields */
 .readonly-field {
@@ -280,7 +347,10 @@ fieldset.vuexy-fieldset {
 }
 
 /* Help text */
-.vuexy-form-field .text-muted.small { font-size: 0.8125rem; margin-top: 0.25rem; }
+.vuexy-form-field .text-muted.small {
+  font-size: 0.8125rem;
+  margin-top: 0.25rem;
+}
 
 /* Error list */
 .vuexy-form-field ul.errorlist {
@@ -294,7 +364,9 @@ fieldset.vuexy-fieldset {
 }
 .vuexy-form-field input.errors,
 .vuexy-form-field select.errors,
-.vuexy-form-field textarea.errors { border-color: var(--bs-danger); }
+.vuexy-form-field textarea.errors {
+  border-color: var(--bs-danger);
+}
 
 /* errornote at top of form */
 p.errornote {
@@ -307,10 +379,16 @@ p.errornote {
   margin-bottom: 1rem;
   position: relative;
 }
-p.errornote::before { content: "⚠"; position: absolute; left: 0.875rem; }
+p.errornote::before {
+  content: "⚠";
+  position: absolute;
+  left: 0.875rem;
+}
 
 /* ── Submit row (sidebar layout) ─────────────────────────────────────────── */
-.submit-row .btn + .btn { margin-top: 0; }
+.submit-row .btn + .btn {
+  margin-top: 0;
+}
 
 /* Sticky sidebar on large screens */
 @media (min-width: 992px) {
@@ -321,11 +399,18 @@ p.errornote::before { content: "⚠"; position: absolute; left: 0.875rem; }
 }
 
 /* ── Inline formsets ─────────────────────────────────────────────────────── */
-.inline-group .empty-form { border-style: dashed !important; opacity: .6; }
-.inline-group .empty-form:hover { opacity: .8; }
+.inline-group .empty-form {
+  border-style: dashed !important;
+  opacity: 0.6;
+}
+.inline-group .empty-form:hover {
+  opacity: 0.8;
+}
 
 /* Add-row button (Django's JS injects this) */
-.add-row td { padding: 0.75rem 1rem; }
+.add-row td {
+  padding: 0.75rem 1rem;
+}
 .add-row a {
   color: var(--bs-primary);
   font-size: 0.875rem;
@@ -335,8 +420,14 @@ p.errornote::before { content: "⚠"; position: absolute; left: 0.875rem; }
   align-items: center;
   gap: 0.3rem;
 }
-.add-row a::before { content: "+"; font-size: 1.1rem; line-height: 1; }
-.add-row a:hover { text-decoration: underline; }
+.add-row a::before {
+  content: "+";
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.add-row a:hover {
+  text-decoration: underline;
+}
 
 /* ══════════════════════════════════════════════════════════════════════════
    Tabular inline table — UNIVERSAL transparent background fix
@@ -388,7 +479,7 @@ table.tabular,
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: .04em;
+  letter-spacing: 0.04em;
   color: var(--bs-heading-color);
   padding: 0.65rem 0.875rem;
   background: transparent !important;
@@ -414,18 +505,39 @@ table.tabular,
 /* 5. Hover state */
 .inline-group table tbody tr:hover td,
 .table.tabular > tbody > tr:hover > td {
-  background: rgba(var(--bs-primary-rgb), .04) !important;
+  background: rgba(var(--bs-primary-rgb), 0.04) !important;
+}
+
+/* 6. Hide the leading "original" column.
+   tabular.html always renders <th class="original"></th> and
+   <td class="original"> on every row. Django's inline JS sets an inline
+   width:10px on these so the contents collapse, but the cell still paints
+   an empty leading column with borders/padding. !important defeats the
+   inline style. The hidden <input>s inside td.original (pk_field, fk_field)
+   keep submitting because display:none does not exclude form data — only
+   `disabled` does. */
+table.tabular th.original,
+table.tabular td.original,
+.table.tabular > thead > tr > th.original,
+.table.tabular > tbody > tr > td.original {
+  display: none !important;
 }
 
 /* Stacked inline rows */
-.inline-related.border-dashed { border-style: dashed !important; }
-.inlinechangelink, .inlineviewlink {
+.inline-related.border-dashed {
+  border-style: dashed !important;
+}
+.inlinechangelink,
+.inlineviewlink {
   font-size: 0.75rem;
   color: var(--bs-primary);
   text-decoration: none;
   margin-left: 0.5rem;
 }
-.inlinechangelink:hover, .inlineviewlink:hover { text-decoration: underline; }
+.inlinechangelink:hover,
+.inlineviewlink:hover {
+  text-decoration: underline;
+}
 
 /* ── Select2 overrides ───────────────────────────────────────────────────── */
 .select2-container--admin-autocomplete .select2-selection--single,
@@ -435,16 +547,23 @@ table.tabular,
   background: var(--bs-body-bg) !important;
   border-radius: var(--bs-border-radius) !important;
 }
-.select2-container--default .select2-selection--single .select2-selection__rendered {
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__rendered {
   color: var(--bs-body-color) !important;
   line-height: calc(1.5em + 0.875rem) !important;
   padding-left: 0.875rem !important;
 }
-.select2-container--default .select2-selection--single .select2-selection__arrow {
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow {
   height: calc(1.5em + 0.875rem + 2px) !important;
   right: 0.5rem !important;
 }
-.select2-container--default .select2-results__option--highlighted[aria-selected] { background: var(--bs-primary) !important; }
+.select2-container--default
+  .select2-results__option--highlighted[aria-selected] {
+  background: var(--bs-primary) !important;
+}
 .select2-dropdown {
   background: var(--bs-body-bg) !important;
   border-color: var(--bs-border-color) !important;
@@ -456,12 +575,21 @@ table.tabular,
   color: var(--bs-body-color) !important;
   border-color: var(--bs-border-color) !important;
 }
-.select2-results__option { font-size: 0.875rem; }
+.select2-results__option {
+  font-size: 0.875rem;
+}
 
 /* ── Date/time widgets ───────────────────────────────────────────────────── */
-.datetimeshortcuts a { font-size: 0.8125rem; color: var(--bs-primary); text-decoration: none; }
-.datetimeshortcuts a:hover { text-decoration: underline; }
-.calendarbox, .clockbox {
+.datetimeshortcuts a {
+  font-size: 0.8125rem;
+  color: var(--bs-primary);
+  text-decoration: none;
+}
+.datetimeshortcuts a:hover {
+  text-decoration: underline;
+}
+.calendarbox,
+.clockbox {
   background: var(--bs-body-bg) !important;
   border: 1px solid var(--bs-border-color) !important;
   border-radius: var(--bs-border-radius-lg) !important;
@@ -469,63 +597,207 @@ table.tabular,
   color: var(--bs-body-color) !important;
   z-index: 9999 !important;
 }
-.calendar caption { background: var(--bs-primary) !important; color: #fff !important; }
-.calendar td a { text-decoration: none; color: var(--bs-body-color); padding: 0.25rem; }
-.calendar td a:hover { background: rgba(var(--bs-primary-rgb), .15) !important; border-radius: 3px; }
-.calendar td.selected a { background: var(--bs-primary) !important; color: #fff !important; border-radius: 3px; }
-.calendar td.today a { font-weight: 700; color: var(--bs-primary) !important; }
-.calendar td.today.selected a { background: var(--bs-primary) !important; color: #fff !important; border-radius: 3px; }
-.clockbox h2 { background: var(--bs-primary) !important; color: #fff !important; }
-.calendar-shortcuts, .timelist { font-size: 0.75rem; }
+.calendar caption {
+  background: var(--bs-primary) !important;
+  color: #fff !important;
+}
+.calendar td a {
+  text-decoration: none;
+  color: var(--bs-body-color);
+  padding: 0.25rem;
+}
+.calendar td a:hover {
+  background: rgba(var(--bs-primary-rgb), 0.15) !important;
+  border-radius: 3px;
+}
+.calendar td.selected a {
+  background: var(--bs-primary) !important;
+  color: #fff !important;
+  border-radius: 3px;
+}
+.calendar td.today a {
+  font-weight: 700;
+  color: var(--bs-primary) !important;
+}
+.calendar td.today.selected a {
+  background: var(--bs-primary) !important;
+  color: #fff !important;
+  border-radius: 3px;
+}
+.clockbox h2 {
+  background: var(--bs-primary) !important;
+  color: #fff !important;
+}
+.calendar-shortcuts,
+.timelist {
+  font-size: 0.75rem;
+}
 
 /* Date range widget */
-.vDateField, .vTimeField { max-width: 150px; }
+.vDateField,
+.vTimeField {
+  max-width: 150px;
+}
 
 /* ── Related widget wrappers ─────────────────────────────────────────────── */
-.related-widget-wrapper { display: inline-flex; align-items: center; gap: 0.5rem; width: 100%; }
+.related-widget-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
 .related-widget-wrapper > input,
-.related-widget-wrapper > select { flex: 1; }
-.related-widget-wrapper a { display: inline-flex; align-items: center; justify-content: center; width: fit-content; height: 2rem; border-radius: var(--bs-border-radius); text-decoration: none; transition: background .15s; flex-shrink: 0; }
-.related-widget-wrapper a img { display: none; }
-.related-widget-wrapper a.related-lookup { background: rgba(var(--bs-primary-rgb), .1); color: var(--bs-primary); }
-.related-widget-wrapper a.add-related { background: rgba(var(--bs-success-rgb), .1); color: var(--bs-success); }
-.related-widget-wrapper a.change-related { background: rgba(var(--bs-warning-rgb), .1); color: var(--bs-warning); }
-.related-widget-wrapper a.delete-related { background: rgba(var(--bs-danger-rgb), .1); color: var(--bs-danger); }
-.related-widget-wrapper a.related-lookup::after { content: "\ea6c"; font-family: "tabler-icons"; font-size: 1rem; }
-.related-widget-wrapper a.add-related::after { content: "\ea12"; font-family: "tabler-icons"; font-size: 1rem; }
-.related-widget-wrapper a.change-related::after { content: "\eb04"; font-family: "tabler-icons"; font-size: 1rem; }
-.related-widget-wrapper a.delete-related::after { content: "\ed18"; font-family: "tabler-icons"; font-size: 1rem; }
-.related-widget-wrapper a:hover { opacity: .8; }
+.related-widget-wrapper > select {
+  flex: 1;
+}
+.related-widget-wrapper a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: 2rem;
+  border-radius: var(--bs-border-radius);
+  text-decoration: none;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.related-widget-wrapper a img {
+  display: none;
+}
+.related-widget-wrapper a.related-lookup {
+  background: rgba(var(--bs-primary-rgb), 0.1);
+  color: var(--bs-primary);
+}
+.related-widget-wrapper a.add-related {
+  background: rgba(var(--bs-success-rgb), 0.1);
+  color: var(--bs-success);
+}
+.related-widget-wrapper a.change-related {
+  background: rgba(var(--bs-warning-rgb), 0.1);
+  color: var(--bs-warning);
+}
+.related-widget-wrapper a.delete-related {
+  background: rgba(var(--bs-danger-rgb), 0.1);
+  color: var(--bs-danger);
+}
+.related-widget-wrapper a.related-lookup::after {
+  content: "\ea6c";
+  font-family: "tabler-icons";
+  font-size: 1rem;
+}
+.related-widget-wrapper a.add-related::after {
+  content: "\ea12";
+  font-family: "tabler-icons";
+  font-size: 1rem;
+}
+.related-widget-wrapper a.change-related::after {
+  content: "\eb04";
+  font-family: "tabler-icons";
+  font-size: 1rem;
+}
+.related-widget-wrapper a.delete-related::after {
+  content: "\ed18";
+  font-family: "tabler-icons";
+  font-size: 1rem;
+}
+.related-widget-wrapper a:hover {
+  opacity: 0.8;
+}
+
+/* Tabular-inline override: when a related FK lives inside a tabular inline,
+   the column is narrow. The default inline-flex row crushes the Select2
+   container to ~30px while the icon links keep their natural width and
+   spill out of the cell. Inside table.tabular, switch to a wrapping flex
+   row: the select takes the full first row (flex: 1 1 100%), and the
+   action icons flow underneath. min-width keeps the Select2 widget usable
+   at very narrow column widths. */
+table.tabular .related-widget-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  width: 100%;
+}
+table.tabular .related-widget-wrapper > select,
+table.tabular .related-widget-wrapper > .select2-container {
+  flex: 1 1 100%;
+  width: 100% !important;
+  min-width: 140px;
+  max-width: 100%;
+}
 
 /* ── Popup windows ───────────────────────────────────────────────────────── */
-body.popup #content { padding: 1.5rem !important; }
-body.popup .submit-row { margin-top: 1rem; }
+body.popup #content {
+  padding: 1.5rem !important;
+}
+body.popup .submit-row {
+  margin-top: 1rem;
+}
 
 /* ── Prepopulated slug fields ────────────────────────────────────────────── */
-.prepopulated_field .prepopulated-text { font-size: 0.8rem; color: var(--bs-secondary-color); }
+.prepopulated_field .prepopulated-text {
+  font-size: 0.8rem;
+  color: var(--bs-secondary-color);
+}
 
 /* ── Delete confirmation ─────────────────────────────────────────────────── */
-#deleted-objects { font-size: 0.875rem; line-height: 1.8; }
-#deleted-objects li ul { padding-left: 1.5rem; margin: 0; }
+#deleted-objects {
+  font-size: 0.875rem;
+  line-height: 1.8;
+}
+#deleted-objects li ul {
+  padding-left: 1.5rem;
+  margin: 0;
+}
 
 /* ── Object history ──────────────────────────────────────────────────────── */
-#change-history .table thead th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: .04em; }
+#change-history .table thead th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
 
 /* ── Utility ─────────────────────────────────────────────────────────────── */
-.clear { clear: both; }
-.hiddenfields { display: none; }
-.visually-hidden, .hidden { display: none !important; }
-.visually-hidden.action-counter, .hidden.action-counter { display: none !important; }
-tr.empty-form { display: none; }
+.clear {
+  clear: both;
+}
+.hiddenfields {
+  display: none;
+}
+.visually-hidden,
+.hidden {
+  display: none !important;
+}
+.visually-hidden.action-counter,
+.hidden.action-counter {
+  display: none !important;
+}
+tr.empty-form {
+  display: none;
+}
 
 /* ── RTL adjustments ─────────────────────────────────────────────────────── */
-[dir="rtl"] #changelist-filter { margin-left: 0; }
-[dir="rtl"] .object-tools { justify-content: flex-start; }
-[dir="rtl"] #changelist-search .form-control { text-align: right; }
-[dir="rtl"] .vuexy-form-field label { text-align: right; }
-[dir="rtl"] ol.breadcrumbs li + li::before { content: "\\"; }
-[dir="rtl"] .submit-row { flex-direction: row-reverse; }
-[dir="rtl"] .vuexy-fieldset-header { direction: rtl; }
+[dir="rtl"] #changelist-filter {
+  margin-left: 0;
+}
+[dir="rtl"] .object-tools {
+  justify-content: flex-start;
+}
+[dir="rtl"] #changelist-search .form-control {
+  text-align: right;
+}
+[dir="rtl"] .vuexy-form-field label {
+  text-align: right;
+}
+[dir="rtl"] ol.breadcrumbs li + li::before {
+  content: "\\";
+}
+[dir="rtl"] .submit-row {
+  flex-direction: row-reverse;
+}
+[dir="rtl"] .vuexy-fieldset-header {
+  direction: rtl;
+}
 
 /* ── input[type="submit"] → Vuexy primary button ─────────────────────────── */
 /*
@@ -547,22 +819,22 @@ input[type="submit"]:not(.btn) {
   user-select: none;
   border: 1px solid transparent;
   border-radius: var(--bs-border-radius);
-  transition: all .15s ease-in-out;
+  transition: all 0.15s ease-in-out;
   -webkit-appearance: none;
   appearance: none;
   background-color: var(--bs-primary);
   color: #fff;
   border-color: var(--bs-primary);
-  box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-primary-rgb), .4);
+  box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-primary-rgb), 0.4);
 }
 input[type="submit"]:not(.btn):hover {
   background-color: color-mix(in srgb, var(--bs-primary) 85%, #000 15%);
-  border-color:     color-mix(in srgb, var(--bs-primary) 85%, #000 15%);
-  box-shadow: 0 0.25rem 0.5rem rgba(var(--bs-primary-rgb), .4);
+  border-color: color-mix(in srgb, var(--bs-primary) 85%, #000 15%);
+  box-shadow: 0 0.25rem 0.5rem rgba(var(--bs-primary-rgb), 0.4);
 }
 input[type="submit"]:not(.btn):focus {
   outline: 0;
-  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), .35);
+  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), 0.35);
 }
 input[type="submit"]:not(.btn):active {
   background-color: color-mix(in srgb, var(--bs-primary) 75%, #000 25%);
@@ -572,13 +844,13 @@ input[type="submit"].unset-password,
 input[type="submit"].deletelink {
   background-color: var(--bs-danger);
   border-color: var(--bs-danger);
-  box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-danger-rgb), .4);
+  box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-danger-rgb), 0.4);
   color: #fff;
 }
 input[type="submit"].unset-password:hover,
 input[type="submit"].deletelink:hover {
   background-color: color-mix(in srgb, var(--bs-danger) 85%, #000 15%);
-  border-color:     color-mix(in srgb, var(--bs-danger) 85%, #000 15%);
+  border-color: color-mix(in srgb, var(--bs-danger) 85%, #000 15%);
 }
 
 /* ── a[role="button"] → Vuexy secondary outlined button ─────────────────── */
@@ -596,7 +868,7 @@ a[role="button"]:not(.btn):not(.dropdown-item):not([class*="page-link"]) {
   border-radius: var(--bs-border-radius);
   color: var(--bs-body-color);
   background-color: transparent;
-  transition: all .15s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 a[role="button"]:not(.btn):not(.dropdown-item):not([class*="page-link"]):hover {
   background-color: var(--bs-tertiary-bg);
@@ -606,7 +878,11 @@ a[role="button"]:not(.btn):not(.dropdown-item):not([class*="page-link"]):hover {
 
 /* ── Clearfix ────────────────────────────────────────────────────────────── */
 .djn-clear::after,
-.module::after { content: ""; display: table; clear: both; }
+.module::after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
 /* ══════════════════════════════════════════════════════════════════════════
    DateRangeFilter (rangefilter package) — Vuexy integration
@@ -637,7 +913,7 @@ li.rangefilter-filter h3,
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
   color: var(--bs-secondary-color);
   margin: 0 0 0.375rem 0;
   padding: 0;
@@ -656,14 +932,16 @@ li.rangefilter-filter input[type="text"],
   background-color: var(--bs-body-bg);
   border: 1px solid var(--bs-border-color);
   border-radius: var(--bs-border-radius);
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
   margin-bottom: 0.375rem;
 }
 li.rangefilter-filter input[type="text"]:focus,
 .rangefilter-filter input[type="text"]:focus {
   border-color: var(--bs-primary);
   outline: 0;
-  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), .2);
+  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), 0.2);
 }
 
 /* Placeholder text */
@@ -684,7 +962,10 @@ li.rangefilter-filter a,
   font-weight: 500;
   border-radius: var(--bs-border-radius);
   text-decoration: none;
-  transition: background-color .15s, border-color .15s, color .15s;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s;
   border: 1px solid transparent;
   margin-top: 0.25rem;
   margin-right: 0.375rem;
@@ -700,7 +981,7 @@ li.rangefilter-filter a:first-of-type,
 li.rangefilter-filter a:first-of-type:hover,
 .rangefilter-filter a:first-of-type:hover {
   background-color: color-mix(in srgb, var(--bs-primary) 85%, #000 15%);
-  border-color:     color-mix(in srgb, var(--bs-primary) 85%, #000 15%);
+  border-color: color-mix(in srgb, var(--bs-primary) 85%, #000 15%);
 }
 
 /* "Reset" button style */
@@ -765,7 +1046,9 @@ ul.rangefilter-filter-list {
   width: 100% !important;
 }
 
-.vuexy-form-field .select2-container--admin-autocomplete .select2-selection--single,
+.vuexy-form-field
+  .select2-container--admin-autocomplete
+  .select2-selection--single,
 .vuexy-form-field .select2-container--default .select2-selection--single {
   width: 100% !important;
   border-color: var(--bs-border-color) !important;
@@ -775,10 +1058,14 @@ ul.rangefilter-filter-list {
 }
 
 /* Focus state for the autocomplete selects inside vuexy-form-field */
-.vuexy-form-field .select2-container--admin-autocomplete.select2-container--focus .select2-selection--single,
-.vuexy-form-field .select2-container--default.select2-container--focus .select2-selection--single {
+.vuexy-form-field
+  .select2-container--admin-autocomplete.select2-container--focus
+  .select2-selection--single,
+.vuexy-form-field
+  .select2-container--default.select2-container--focus
+  .select2-selection--single {
   border-color: var(--bs-primary) !important;
-  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), .2) !important;
+  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), 0.2) !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -793,18 +1080,18 @@ ul.rangefilter-filter-list {
   max-height: 500px;
   overflow-y: auto;
   padding: 12px;
-  border: 1px solid rgba(0,0,0,.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 6px;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 13px;
   line-height: 1.5;
-  background-color: rgba(0,0,0,.03);
+  background-color: rgba(0, 0, 0, 0.03);
   color: inherit;
 }
 
 .dark-style .json-pretty-preview pre {
-  background-color: rgba(255,255,255,.05);
-  border-color: rgba(255,255,255,.1);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
   color: #dcdfe6;
 }
 
@@ -820,7 +1107,9 @@ ul.rangefilter-filter-list {
 
 /* All cells top-aligned */
 .tabular .table tbody td,
-.djn-table tbody td { vertical-align: top; }
+.djn-table tbody td {
+  vertical-align: top;
+}
 
 /* The wrapper div inside every inline <td> (vuexy tabular.html only) */
 .tabular .table td .field-cell-inner {
@@ -830,48 +1119,136 @@ ul.rangefilter-filter-list {
   min-width: 0;
 }
 
-/* ── Split datetime widget inside tabular inlines ───────────────────────── */
+/* ── Date / split-datetime widgets inside tabular inlines ───────────────── */
 /*
- * Django's AdminSplitDateTime renders:
+ * Django's AdminDateWidget renders:
+ *   <p class="date">
+ *     <input class="vDateField" size="10">
+ *   </p>
+ * AdminSplitDateTime renders:
  *   <p class="datetime">
  *     <label>Date:</label> <input class="vDateField" size="10">
  *     <br>
  *     <label>Time:</label> <input class="vTimeField" size="8">
  *   </p>
- * Then DateTimeShortcuts.js injects <span class="datetimeshortcuts">
- * with "Today"/"Now" links and calendar/clock icons.
+ * Then DateTimeShortcuts.js injects, after each input, a
+ *   <span class="datetimeshortcuts">
+ *     <a>Today|Now</a> | <a><span class="date-icon|clock-icon"/></a>
+ *   </span>
+ * The second <a> is the picker trigger -- it opens .calendarbox /
+ * .clockbox (which we style elsewhere in this file).
  *
- * We hide the labels, <br>, and shortcuts to make a compact cell.
- * Rules target BOTH vuexy tabular (.field-cell-inner) and
- * nested_admin tabular (.djn-td).
+ * Rules target BOTH the vuexy tabular template (.field-cell-inner) and
+ * the nested_admin tabular template (.djn-td).
+ *
+ * Layout strategy:
+ * The wrapper is a 2-column grid: col 1 = input, col 2 = picker icon.
+ * With <br> and labels removed from layout, grid auto-placement gives:
+ *   date-only:        [input] [calendar]
+ *   split datetime:   [input] [calendar]
+ *                     [input] [clock]
+ * regardless of cell width. (A flex-wrap layout would otherwise let the
+ * clock icon orphan onto its own line whenever the running width was
+ * close to the cell width, producing inconsistent rows.)
+ *
+ * Icon strategy:
+ * Django's widgets.css (which paints the SVG backgrounds on .date-icon
+ * and .clock-icon) is not loaded by this theme. We swap the missing
+ * backgrounds for Tabler glyphs, matching the icon system used by
+ * .related-widget-wrapper triggers above.
  */
 
-/* The <p class="datetime"> wrapper — compact flex row */
+/* Wrapper -- 2-column grid (input | trigger) for both p.date and p.datetime */
+.tabular .table td .field-cell-inner p.date,
 .tabular .table td .field-cell-inner p.datetime,
+.djn-table td.djn-td p.date,
 .djn-table td.djn-td p.datetime {
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 0.25rem 0.5rem;
   align-items: center;
-  gap: 0.25rem;
+  justify-content: start;
+  margin: 0;
 }
 
-/* Hide "Date:" / "Time:" labels */
+/* Hide "Date:" / "Time:" labels (split datetime only) */
 .tabular .table td .field-cell-inner p.datetime > label,
 .djn-table td.djn-td p.datetime > label {
   display: none;
 }
 
-/* Hide <br> between date and time inputs */
+/* Hide the <br> Django emits between the date and time subwidgets --
+   the grid handles the line break via auto-flow. */
 .tabular .table td .field-cell-inner p.datetime > br,
 .djn-table td.djn-td p.datetime > br {
   display: none;
 }
 
-/* Hide ALL datetimeshortcuts (Today/Now links + icons) in inline rows */
+/* Picker trigger wrapper -- compact, primary-tinted square pill */
 .tabular .table td .field-cell-inner .datetimeshortcuts,
 .djn-table td.djn-td .datetimeshortcuts {
-  display: none !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0; /* swallows the unwrapped " | " text node */
+  line-height: 1;
+}
+
+/* Hide the leading "Today" / "Now" text link when an icon link follows.
+   The icon alone is enough; saves cell width. */
+.tabular
+  .table
+  td
+  .field-cell-inner
+  .datetimeshortcuts
+  > a:first-of-type:not(:last-of-type),
+.djn-table td.djn-td .datetimeshortcuts > a:first-of-type:not(:last-of-type) {
+  display: none;
+}
+
+/* Picker trigger anchor */
+.tabular .table td .field-cell-inner .datetimeshortcuts > a,
+.djn-table td.djn-td .datetimeshortcuts > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--bs-border-radius);
+  background: rgba(var(--bs-primary-rgb), 0.1);
+  color: var(--bs-primary);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.tabular .table td .field-cell-inner .datetimeshortcuts > a:hover,
+.djn-table td.djn-td .datetimeshortcuts > a:hover {
+  background: rgba(var(--bs-primary-rgb), 0.2);
+}
+
+/* Override the missing SVG background on .date-icon/.clock-icon spans
+   and paint a Tabler glyph via ::before instead. */
+.tabular .table td .field-cell-inner .datetimeshortcuts .date-icon,
+.tabular .table td .field-cell-inner .datetimeshortcuts .clock-icon,
+.djn-table td.djn-td .datetimeshortcuts .date-icon,
+.djn-table td.djn-td .datetimeshortcuts .clock-icon {
+  width: auto;
+  height: auto;
+  background: none !important;
+  overflow: visible;
+}
+.tabular .table td .field-cell-inner .datetimeshortcuts .date-icon::before,
+.djn-table td.djn-td .datetimeshortcuts .date-icon::before {
+  content: "\ea53"; /* tabler ti-calendar */
+  font-family: "tabler-icons";
+  font-size: 1rem;
+  line-height: 1;
+}
+.tabular .table td .field-cell-inner .datetimeshortcuts .clock-icon::before,
+.djn-table td.djn-td .datetimeshortcuts .clock-icon::before {
+  content: "\ea70"; /* tabler ti-clock */
+  font-family: "tabler-icons";
+  font-size: 1rem;
+  line-height: 1;
 }
 
 /* Constrain date and time inputs — compact for table cells */
@@ -894,20 +1271,31 @@ ul.rangefilter-filter-list {
 .djn-table td.djn-td .vTimeField:focus {
   border-color: var(--bs-primary);
   outline: 0;
-  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2);
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), 0.2);
 }
-
 
 /* Make tabular inline table scroll horizontally when content is wide */
 .tabular .card-datatable,
-.djn-table { overflow-x: auto; }
+.djn-table {
+  overflow-x: auto;
+}
 
 /* ── Regular inputs inside inline <td> ───────────────────────────────────── */
 /* Text / number / email / url inputs */
-.tabular .table td .field-cell-inner input:not([type="checkbox"]):not([type="radio"]):not(.vDateField):not(.vTimeField),
+.tabular
+  .table
+  td
+  .field-cell-inner
+  input:not([type="checkbox"]):not([type="radio"]):not(.vDateField):not(
+    .vTimeField
+  ),
 .tabular .table td .field-cell-inner select,
 .tabular .table td .field-cell-inner textarea,
-.djn-table td.djn-td input:not([type="checkbox"]):not([type="radio"]):not(.vDateField):not(.vTimeField),
+.djn-table
+  td.djn-td
+  input:not([type="checkbox"]):not([type="radio"]):not(.vDateField):not(
+    .vTimeField
+  ),
 .djn-table td.djn-td select,
 .djn-table td.djn-td textarea {
   display: block;
@@ -919,23 +1307,41 @@ ul.rangefilter-filter-list {
   border-radius: var(--bs-border-radius);
   background: var(--bs-body-bg);
   color: var(--bs-body-color);
-  transition: border-color .15s;
+  transition: border-color 0.15s;
 }
-.tabular .table td .field-cell-inner input:not([type="checkbox"]):not([type="radio"]):not(.vDateField):not(.vTimeField):focus,
+.tabular
+  .table
+  td
+  .field-cell-inner
+  input:not([type="checkbox"]):not([type="radio"]):not(.vDateField):not(
+    .vTimeField
+  ):focus,
 .tabular .table td .field-cell-inner select:focus,
 .tabular .table td .field-cell-inner textarea:focus,
-.djn-table td.djn-td input:not([type="checkbox"]):not([type="radio"]):not(.vDateField):not(.vTimeField):focus,
+.djn-table
+  td.djn-td
+  input:not([type="checkbox"]):not([type="radio"]):not(.vDateField):not(
+    .vTimeField
+  ):focus,
 .djn-table td.djn-td select:focus,
 .djn-table td.djn-td textarea:focus {
   border-color: var(--bs-primary);
   outline: 0;
-  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2);
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), 0.2);
 }
 
 /* Select2 widgets inside inline tds */
 .tabular .table td .field-cell-inner .select2-container,
-.djn-table td.djn-td .select2-container { width: 100% !important; min-width: 120px; }
-.tabular .table td .field-cell-inner .select2-container .select2-selection--single,
+.djn-table td.djn-td .select2-container {
+  width: 100% !important;
+  min-width: 120px;
+}
+.tabular
+  .table
+  td
+  .field-cell-inner
+  .select2-container
+  .select2-selection--single,
 .djn-table td.djn-td .select2-container .select2-selection--single {
   width: 100% !important;
   height: calc(1.4em + 0.5rem + 2px) !important;
@@ -943,17 +1349,32 @@ ul.rangefilter-filter-list {
   background: var(--bs-body-bg) !important;
   border-radius: var(--bs-border-radius) !important;
 }
-.tabular .table td .field-cell-inner .select2-container .select2-selection--single .select2-selection__rendered,
-.djn-table td.djn-td .select2-container .select2-selection--single .select2-selection__rendered {
+.tabular
+  .table
+  td
+  .field-cell-inner
+  .select2-container
+  .select2-selection--single
+  .select2-selection__rendered,
+.djn-table
+  td.djn-td
+  .select2-container
+  .select2-selection--single
+  .select2-selection__rendered {
   line-height: calc(1.4em + 0.5rem) !important;
   padding-left: 0.5rem !important;
   color: var(--bs-body-color) !important;
   font-size: 0.875rem !important;
 }
-.tabular .table td .field-cell-inner .select2-container--focus .select2-selection--single,
+.tabular
+  .table
+  td
+  .field-cell-inner
+  .select2-container--focus
+  .select2-selection--single,
 .djn-table td.djn-td .select2-container--focus .select2-selection--single {
   border-color: var(--bs-primary) !important;
-  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2) !important;
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), 0.2) !important;
 }
 
 /* Error list inside inline <td> */
@@ -972,11 +1393,13 @@ ul.rangefilter-filter-list {
   border: none !important;
   background: var(--bs-card-bg, var(--bs-body-bg));
   border-radius: var(--bs-border-radius-lg);
-  box-shadow: var(--bs-card-box-shadow, 0 2px 6px rgba(0,0,0,.06));
+  box-shadow: var(--bs-card-box-shadow, 0 2px 6px rgba(0, 0, 0, 0.06));
   margin-bottom: 1.5rem;
   overflow: hidden;
 }
-.dark-style .djn-fieldset { box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+.dark-style .djn-fieldset {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
 
 /* nested_admin heading */
 .djn-fieldset h2.inline-heading {
@@ -993,7 +1416,7 @@ ul.rangefilter-filter-list {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: .04em;
+  letter-spacing: 0.04em;
   color: var(--bs-heading-color);
   padding: 0.65rem 0.875rem;
   background: transparent;
@@ -1006,7 +1429,9 @@ ul.rangefilter-filter-list {
   vertical-align: middle;
   border-bottom: 1px solid var(--bs-border-color-translucent);
 }
-.djn-table .djn-tr:hover td { background: rgba(var(--bs-primary-rgb), .04); }
+.djn-table .djn-tr:hover td {
+  background: rgba(var(--bs-primary-rgb), 0.04);
+}
 
 /* nested_admin add-row link */
 .djn-table .add-row td,
@@ -1021,7 +1446,9 @@ ul.rangefilter-filter-list {
   text-decoration: none;
 }
 .djn-table .add-row a:hover,
-.djn-table .djn-add-handler:hover { text-decoration: underline; }
+.djn-table .djn-add-handler:hover {
+  text-decoration: underline;
+}
 
 /* ══════════════════════════════════════════════════════════════════════════
    Tabular inline — Select2 inside related-widget-wrapper
@@ -1047,16 +1474,26 @@ ul.rangefilter-filter-list {
 /* Force Select2 to fill the wrapper */
 .tabular .table td .related-widget-wrapper .select2-container,
 .djn-table td.djn-td .related-widget-wrapper .select2-container,
-.tabular .table td .field-cell-inner .related-widget-wrapper .select2-container {
+.tabular
+  .table
+  td
+  .field-cell-inner
+  .related-widget-wrapper
+  .select2-container {
   flex: 1;
-  width: 0 !important;          /* flex: 1 takes over */
+  width: 0 !important; /* flex: 1 takes over */
   min-width: 120px;
 }
 
 /* Fix the selection box height, border, and bg for dark mode */
 .tabular .table td .related-widget-wrapper .select2-selection--single,
 .djn-table td.djn-td .related-widget-wrapper .select2-selection--single,
-.tabular .table td .field-cell-inner .related-widget-wrapper .select2-selection--single {
+.tabular
+  .table
+  td
+  .field-cell-inner
+  .related-widget-wrapper
+  .select2-selection--single {
   height: calc(1.4em + 0.5rem + 2px) !important;
   border: 1px solid var(--bs-border-color) !important;
   background: var(--bs-body-bg) !important;
@@ -1064,7 +1501,12 @@ ul.rangefilter-filter-list {
 }
 .tabular .table td .related-widget-wrapper .select2-selection__rendered,
 .djn-table td.djn-td .related-widget-wrapper .select2-selection__rendered,
-.tabular .table td .field-cell-inner .related-widget-wrapper .select2-selection__rendered {
+.tabular
+  .table
+  td
+  .field-cell-inner
+  .related-widget-wrapper
+  .select2-selection__rendered {
   color: var(--bs-body-color) !important;
   line-height: calc(1.4em + 0.5rem) !important;
   padding-left: 0.5rem !important;
@@ -1076,10 +1518,19 @@ ul.rangefilter-filter-list {
 }
 
 /* Focus ring */
-.tabular .table td .related-widget-wrapper .select2-container--focus .select2-selection--single,
-.djn-table td.djn-td .related-widget-wrapper .select2-container--focus .select2-selection--single {
+.tabular
+  .table
+  td
+  .related-widget-wrapper
+  .select2-container--focus
+  .select2-selection--single,
+.djn-table
+  td.djn-td
+  .related-widget-wrapper
+  .select2-container--focus
+  .select2-selection--single {
   border-color: var(--bs-primary) !important;
-  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2) !important;
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), 0.2) !important;
 }
 
 /* Change/Add related icon links — keep small */
@@ -1106,7 +1557,7 @@ ul.rangefilter-filter-list {
   border: 1px solid var(--bs-border-color);
   border-radius: var(--bs-border-radius);
   cursor: pointer;
-  transition: border-color .15s;
+  transition: border-color 0.15s;
 }
 .tabular .table td .field-cell-inner input[type="file"]:hover,
 .tabular .table td input[type="file"]:hover,
@@ -1118,7 +1569,7 @@ ul.rangefilter-filter-list {
 .djn-table td.djn-td input[type="file"]:focus {
   border-color: var(--bs-primary);
   outline: 0;
-  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2);
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), 0.2);
 }
 
 /* Style the file input button part (WebKit/Blink) */
@@ -1133,7 +1584,7 @@ ul.rangefilter-filter-list {
   border: none;
   border-radius: var(--bs-border-radius);
   cursor: pointer;
-  transition: background .15s;
+  transition: background 0.15s;
 }
 .tabular .table td input[type="file"]::file-selector-button:hover,
 .djn-table td.djn-td input[type="file"]::file-selector-button:hover {
@@ -1188,8 +1639,12 @@ ul.rangefilter-filter-list {
 }
 
 /* Rendered text inside selection */
-.select2-container--admin-autocomplete .select2-selection--single .select2-selection__rendered,
-.select2-container--default .select2-selection--single .select2-selection__rendered {
+.select2-container--admin-autocomplete
+  .select2-selection--single
+  .select2-selection__rendered,
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__rendered {
   color: var(--bs-body-color) !important;
   line-height: normal !important;
   padding-left: 0.75rem !important;
@@ -1198,14 +1653,22 @@ ul.rangefilter-filter-list {
 }
 
 /* Placeholder text */
-.select2-container--admin-autocomplete .select2-selection--single .select2-selection__placeholder,
-.select2-container--default .select2-selection--single .select2-selection__placeholder {
+.select2-container--admin-autocomplete
+  .select2-selection--single
+  .select2-selection__placeholder,
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__placeholder {
   color: var(--bs-secondary-color) !important;
 }
 
 /* Arrow */
-.select2-container--admin-autocomplete .select2-selection--single .select2-selection__arrow,
-.select2-container--default .select2-selection--single .select2-selection__arrow {
+.select2-container--admin-autocomplete
+  .select2-selection--single
+  .select2-selection__arrow,
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow {
   height: 100% !important;
   right: 0.5rem !important;
 }
@@ -1215,12 +1678,14 @@ ul.rangefilter-filter-list {
 }
 
 /* Focus state */
-.select2-container--admin-autocomplete.select2-container--focus .select2-selection--single,
-.select2-container--admin-autocomplete.select2-container--open .select2-selection--single,
+.select2-container--admin-autocomplete.select2-container--focus
+  .select2-selection--single,
+.select2-container--admin-autocomplete.select2-container--open
+  .select2-selection--single,
 .select2-container--default.select2-container--focus .select2-selection--single,
 .select2-container--default.select2-container--open .select2-selection--single {
   border-color: var(--bs-primary) !important;
-  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), .2) !important;
+  box-shadow: 0 0 0 0.15rem rgba(var(--bs-primary-rgb), 0.2) !important;
 }
 
 /* ── 2. Global dropdown: the results popup (appended to <body>) ──────────── */
@@ -1229,12 +1694,12 @@ ul.rangefilter-filter-list {
   background: var(--bs-body-bg) !important;
   border: 1px solid var(--bs-border-color) !important;
   border-radius: var(--bs-border-radius) !important;
-  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, .15) !important;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.15) !important;
   z-index: 9999 !important;
   min-width: 200px;
 }
 .dark-style .select2-dropdown {
-  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, .5) !important;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.5) !important;
 }
 
 /* Search box inside dropdown */
@@ -1253,7 +1718,7 @@ ul.rangefilter-filter-list {
 }
 .select2-dropdown .select2-search__field:focus {
   border-color: var(--bs-primary) !important;
-  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2) !important;
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), 0.2) !important;
 }
 
 /* Results list */
@@ -1267,19 +1732,19 @@ ul.rangefilter-filter-list {
   padding: 0.5rem 0.75rem !important;
   font-size: 0.875rem;
   color: var(--bs-body-color) !important;
-  transition: background .1s;
+  transition: background 0.1s;
 }
 
 /* Hover / keyboard-highlighted option */
 .select2-dropdown .select2-results__option--highlighted,
 .select2-dropdown .select2-results__option--highlighted[aria-selected] {
-  background: rgba(var(--bs-primary-rgb), .12) !important;
+  background: rgba(var(--bs-primary-rgb), 0.12) !important;
   color: var(--bs-primary) !important;
 }
 
 /* Selected (already chosen) option */
 .select2-dropdown .select2-results__option[aria-selected="true"] {
-  background: rgba(var(--bs-primary-rgb), .08) !important;
+  background: rgba(var(--bs-primary-rgb), 0.08) !important;
   color: var(--bs-primary) !important;
   font-weight: 600;
 }
@@ -1324,7 +1789,7 @@ ul.rangefilter-filter-list {
   border: 1px solid var(--bs-border-color);
   border-radius: var(--bs-border-radius);
   cursor: pointer;
-  transition: border-color .15s;
+  transition: border-color 0.15s;
 }
 #content input[type="file"]:hover {
   border-color: var(--bs-primary);
@@ -1332,7 +1797,7 @@ ul.rangefilter-filter-list {
 #content input[type="file"]:focus {
   border-color: var(--bs-primary);
   outline: 0;
-  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), .2);
+  box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), 0.2);
 }
 #content input[type="file"]::file-selector-button {
   padding: 0.25rem 0.75rem;
@@ -1344,7 +1809,7 @@ ul.rangefilter-filter-list {
   border: none;
   border-radius: var(--bs-border-radius);
   cursor: pointer;
-  transition: background .15s;
+  transition: background 0.15s;
 }
 #content input[type="file"]::file-selector-button:hover {
   filter: brightness(0.9);
